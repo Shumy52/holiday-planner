@@ -1,0 +1,15 @@
+# package server# frontend uses Nginx; backend stays here
+FROM golang:1.22-bookworm AS build
+WORKDIR /app
+COPY . .
+RUN go build -o server ./cmd/server
+
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y ca-certificates fontconfig \
+    wkhtmltopdf && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY --from=build /app/server /app/server
+COPY templates /app/templates
+ENV API_PORT=8081
+EXPOSE 8081
+CMD ["/app/server"]
