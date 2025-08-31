@@ -1,5 +1,5 @@
 # package server# frontend uses Nginx; backend stays here
-FROM golang:1.22-bookworm AS build
+FROM golang:1.23-bookworm AS build
 WORKDIR /app
 COPY . .
 RUN go build -o server ./cmd/server

@@ -1,0 +1,6 @@
+<form (ngSubmit)="submit()">
+  <label>Start: <input type="date" [(ngModel)]="start" name="start"></label>
+  <label>End:   <input type="date" [(ngModel)]="end"   name="end"></label>
+  <button type="submit">Trimite cerere</button>
+  <div *ngIf="msg">{{msg}}</div>
+</form>

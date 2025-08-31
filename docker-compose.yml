@@ -24,6 +24,7 @@ services:
 
   backend:
     build: ./backend
+    restart: always
     env_file: .env
     ports: ["${API_PORT}:8081"]
     depends_on: [db, keycloak]
@@ -32,6 +33,7 @@ services:
 
   frontend:
     build: ./frontend
+    restart: always
     environment:
       API_URL: http://localhost:${API_PORT}
       KEYCLOAK_URL: ${KEYCLOAK_URL}
